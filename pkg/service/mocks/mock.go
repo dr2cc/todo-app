@@ -6,7 +6,7 @@ package mock_service
 
 import (
 	gomock "github.com/golang/mock/gomock"
-	todo "github.com/zhashkevych/todo-app"
+	todo "todo-app"
 	reflect "reflect"
 )
 

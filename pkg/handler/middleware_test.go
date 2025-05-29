@@ -2,13 +2,14 @@ package handler
 
 import (
 	"errors"
+	"net/http/httptest"
+	"testing"
+	"todo-app/pkg/service"
+	service_mocks "todo-app/pkg/service/mocks"
+
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"github.com/zhashkevych/todo-app/pkg/service"
-	service_mocks "github.com/zhashkevych/todo-app/pkg/service/mocks"
-	"net/http/httptest"
-	"testing"
 )
 
 func TestHandler_userIdentity(t *testing.T) {

@@ -5,15 +5,15 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"todo-app"
+	"todo-app/pkg/handler"
+	"todo-app/pkg/repository"
+	"todo-app/pkg/service"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"github.com/zhashkevych/todo-app"
-	"github.com/zhashkevych/todo-app/pkg/handler"
-	"github.com/zhashkevych/todo-app/pkg/repository"
-	"github.com/zhashkevych/todo-app/pkg/service"
 )
 
 // @title Todo App API
