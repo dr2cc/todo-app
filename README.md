@@ -31,6 +31,10 @@ docker run --name=todo-db -e POSTGRES_PASSWORD=qwerty -p 5436:5432 -d --rm postg
 # Применение схемы миграции. Миграции это как система контроля версий для db
 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
 
+# Настройка Swagger для проекта на Golang
+https://youtu.be/DBZgt9iIWzk?t=641
+9:30
+
 # 9 5:00
 
 # 5 

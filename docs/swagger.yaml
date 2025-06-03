@@ -71,7 +71,7 @@ paths:
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "404":
-          description: Bad Request
+          description: Not Found
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "500":
@@ -111,7 +111,7 @@ paths:
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "404":
-          description: Bad Request
+          description: Not Found
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "500":
@@ -125,6 +125,36 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Create todo list
+      tags:
+      - lists
+  /api/lists/:id:
+    get:
+      consumes:
+      - application/json
+      description: get list by id
+      operationId: get-list-by-id
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get List By Id
       tags:
       - lists
   /auth/sign-in:
@@ -152,7 +182,7 @@ paths:
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "404":
-          description: Bad Request
+          description: Not Found
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "500":
@@ -191,7 +221,7 @@ paths:
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "404":
-          description: Bad Request
+          description: Not Found
           schema:
             $ref: '#/definitions/handler.errorResponse'
         "500":
