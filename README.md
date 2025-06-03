@@ -16,24 +16,51 @@
 ### Для запуска приложения:
 
 ```
-make build && make run
-```
+go build && make run
 
-### Если приложение запускается впервые, необходимо применить миграции к базе данных:
-
-```
-make migrate
 ```
 # drk
 
-# Запуск контейнера (из скачанного образа) с db, образ postgres должен уже быть скачан
+# Запуск контейнера с db (образ postgres должен уже быть скачан).
+# Со стандартным портом 5432 есть вопросы, меняем его и я (drk) его заменил в config.yml
 docker run --name=todo-db -e POSTGRES_PASSWORD=qwerty -p 5436:5432 -d --rm postgres
-# Применение схемы миграции. Миграции это как система контроля версий для db
+
+# Если приложение запускается впервые, необходимо применить миграции к базе данных:
+## Применение схемы миграции. Миграции это как система контроля версий для db
 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
+
+# hash Получение в конце видео №6
+686a7172686a7177313234363137616a6668616a73b1b3773a05c0ed0176787a4f1574ff0075f7521e
 
 # Настройка Swagger для проекта на Golang
 https://youtu.be/DBZgt9iIWzk?t=641
 9:30
+
+[Документация swagger в нашем проекте](http://localhost:8000/swagger/index.html)
+
+# Установка swagger
+go install github.com/swaggo/swag/cmd/swag@latest
+
+# После запускаем из корня, но ссылаясь на main.go
+# Так создается документация.
+swag init -g .\cmd\main.go
+
+# Была ошибка в import файла handler.go . Два варианта решения:
+# Написать:
+import (
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+)
+
+# или в начале закомментировать хендлер 
+# // router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+# Написать :
+import (
+	"github.com/swaggo/gin-swagger"
+    "github.com/swaggo/files"
+)
+# а после снять комментарий с хендлера и сохранить.
+
 
 # 9 5:00
 
@@ -49,13 +76,15 @@ DB_PASSWORD=qwerty
 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' down
 
 
-## Состояние docker, из него берем CONTAINER ID, в этот раз 0bc0d399a43c
+## Состояние docker, из него берем CONTAINER ID, в этот раз 6f02c8402d0b
 docker ps
-## Подключение к db в контейнере 0bc0d399a43c
-docker exec -it 0bc0d399a43c /bin/bash
+## Подключение к db в контейнере 6f02c8402d0b
+docker exec -it 6f02c8402d0b /bin/bash
 
 ## Комманды linux
 psql -U postgres
+
+select * from users;
 \d
 exit
 exit
