@@ -1,33 +1,14 @@
-# REST API Для Создания TODO Списков на Go
+# Последовательность запуска:
 
-## <a href="https://www.youtube.com/playlist?list=PLbTTxxr-hMmyFAvyn7DeOgNRN8BQdjFm8">Видеокурс на YouTube</a>
-
-## В курсе разобранны следующие концепции:
-- Разработка Веб-Приложений на Go, следуя дизайну REST API.
-- Работа с фреймворком <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a>.
-- Подход Чистой Архитектуры в построении структуры приложения. Техника внедрения зависимости.
-- Работа с БД Postgres. Запуск из Docker. Генерация файлов миграций. 
-- Конфигурация приложения с помощью библиотеки <a href="https://github.com/spf13/viper">spf13/viper</a>. Работа с переменными окружения.
-- Работа с БД, используя библиотеку <a href="https://github.com/jmoiron/sqlx">sqlx</a>.
-- Регистрация и аутентификация. Работа с JWT. Middleware.
-- Написание SQL запросов.
-- Graceful Shutdown
-
-### Для запуска приложения:
-
-```
-go build && make run
-
-```
-# drk
-
-# Запуск контейнера с db (образ postgres должен уже быть скачан).
+#   1 Запуск контейнера с db (образ postgres должен уже быть скачан).
 # Со стандартным портом 5432 есть вопросы, меняем его и я (drk) его заменил в config.yml
 docker run --name=todo-db -e POSTGRES_PASSWORD=qwerty -p 5436:5432 -d --rm postgres
 
-# Если приложение запускается впервые, необходимо применить миграции к базе данных:
-## Применение схемы миграции. Миграции это как система контроля версий для db
+##  2 Применение схемы миграции (миграции соответствуют системе контроля версий для db)
 migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/postgres?sslmode=disable' up
+
+### 3 Запуск проекта (go run .\cmd\main.go) или скомпилированного файла.
+
 
 # hash Получение в конце видео №6
 686a7172686a7177313234363137616a6668616a73b1b3773a05c0ed0176787a4f1574ff0075f7521e
@@ -106,3 +87,19 @@ scoop install migrate
 
 # Делается если в репозитории нет схем миграции. Создание структур миграции, утилита migrate к этому моменту должна быть установлена
 migrate create -ext sql -dir ./schema -seq init
+
+
+# REST API Для Создания TODO Списков на Go
+
+## <a href="https://www.youtube.com/playlist?list=PLbTTxxr-hMmyFAvyn7DeOgNRN8BQdjFm8">Видеокурс на YouTube</a>
+
+## В курсе разобранны следующие концепции:
+- Разработка Веб-Приложений на Go, следуя дизайну REST API.
+- Работа с фреймворком <a href="https://github.com/gin-gonic/gin">gin-gonic/gin</a>.
+- Подход Чистой Архитектуры в построении структуры приложения. Техника внедрения зависимости.
+- Работа с БД Postgres. Запуск из Docker. Генерация файлов миграций. 
+- Конфигурация приложения с помощью библиотеки <a href="https://github.com/spf13/viper">spf13/viper</a>. Работа с переменными окружения.
+- Работа с БД, используя библиотеку <a href="https://github.com/jmoiron/sqlx">sqlx</a>.
+- Регистрация и аутентификация. Работа с JWT. Middleware.
+- Написание SQL запросов.
+- Graceful Shutdown
