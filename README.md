@@ -10,8 +10,6 @@ migrate -path ./schema -database 'postgres://postgres:qwerty@localhost:5436/post
 ### 3 Запуск проекта (go run .\cmd\main.go) или скомпилированного файла.
 
 
-# hash Получение в конце видео №6
-686a7172686a7177313234363137616a6668616a73b1b3773a05c0ed0176787a4f1574ff0075f7521e
 
 # Настройка Swagger для проекта на Golang
 https://youtu.be/DBZgt9iIWzk?t=641
@@ -43,8 +41,6 @@ import (
 # а после снять комментарий с хендлера и сохранить.
 
 
-# 9 5:00
-
 # 5 
 ## Один раз, импорт. Позволяет читать .env
 go get -u github.com/joho/godotenv
@@ -67,6 +63,7 @@ psql -U postgres
 
 select * from users;
 \d
+
 exit
 exit
 
