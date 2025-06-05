@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"time"
-	"todo-app"
-	"todo-app/pkg/repository"
+	"todo-app1"
+	"todo-app1/pkg/repository"
 
 	"github.com/dgrijalva/jwt-go"
 )

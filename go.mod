@@ -1,4 +1,4 @@
-module todo-app
+module todo-app1
 
 go 1.23.8
 

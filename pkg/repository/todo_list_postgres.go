@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 	"strings"
-	"todo-app"
+	"todo-app1"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"

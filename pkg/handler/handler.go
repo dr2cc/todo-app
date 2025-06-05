@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"todo-app/pkg/service"
+	"todo-app1/pkg/service"
 
 	"github.com/gin-gonic/gin"
 
@@ -9,7 +9,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "todo-app/docs"
+	_ "todo-app1/docs"
 )
 
 type Handler struct {
