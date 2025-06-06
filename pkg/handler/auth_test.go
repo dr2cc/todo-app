@@ -1,10 +1,17 @@
 package handler
 
 import (
+	"bytes"
+	"net/http/httptest"
 	"testing"
 	"todo-app1"
 
+	"todo-app1/pkg/service"
 	service_mocks "todo-app1/pkg/service/mocks"
+
+	"github.com/gin-gonic/gin"
+	"github.com/go-playground/assert/v2"
+	"github.com/golang/mock/gomock"
 )
 
 func TestHandler_signUp(t *testing.T) {
@@ -37,37 +44,38 @@ func TestHandler_signUp(t *testing.T) {
 			expectedStatusCode:   200,
 			expectedResponseBody: `{"id":1}`,
 		},
+		// Другие сценарии:
+		// //https://youtu.be/Mvw5fbHGJFw?t=582  9:40
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			// // https://youtu.be/Mvw5fbHGJFw?t=420
-			// // from 7 minute
-			// // Init Dependencies (зависимости)
-			// c := gomock.NewController(t)
-			// defer c.Finish()
 
-			// repo := service_mocks.NewMockAuthorization(c)
-			// test.mockBehavior(repo, test.inputUser)
+			// Init Dependencies (зависимости)
+			c := gomock.NewController(t)
+			defer c.Finish()
 
-			// services := &service.Service{Authorization: repo}
-			// handler := Handler{services}
+			repo := service_mocks.NewMockAuthorization(c)
+			test.mockBehavior(repo, test.inputUser)
 
-			// // Init Endpoint
-			// r := gin.New()
-			// r.POST("/sign-up", handler.signUp)
+			services := &service.Service{Authorization: repo}
+			handler := Handler{services}
 
-			// // Create Request
-			// w := httptest.NewRecorder()
-			// req := httptest.NewRequest("POST", "/sign-up",
-			// 	bytes.NewBufferString(test.inputBody))
+			// Init Endpoint
+			r := gin.New()
+			r.POST("/sign-up", handler.signUp)
 
-			// // Make Request
-			// r.ServeHTTP(w, req)
+			// Create Request
+			w := httptest.NewRecorder()
+			req := httptest.NewRequest("POST", "/sign-up",
+				bytes.NewBufferString(test.inputBody))
 
-			// // Assert
-			// assert.Equal(t, w.Code, test.expectedStatusCode)
-			// assert.Equal(t, w.Body.String(), test.expectedResponseBody)
+			// Make Request
+			r.ServeHTTP(w, req)
+
+			// Assert
+			assert.Equal(t, w.Code, test.expectedStatusCode)
+			assert.Equal(t, w.Body.String(), test.expectedResponseBody)
 		})
 	}
 }

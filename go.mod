@@ -71,6 +71,7 @@ require (
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.10.1
+	github.com/go-playground/assert/v2 v2.2.0
 	github.com/golang/mock v1.6.0
 	github.com/magiconair/properties v1.8.10
 	github.com/spf13/viper v1.20.1
