@@ -2,7 +2,7 @@ package repository
 
 import (
 	"testing"
-	"todo-app"
+	"todo-app1"
 
 	"github.com/stretchr/testify/assert"
 	sqlmock "github.com/zhashkevych/go-sqlxmock"

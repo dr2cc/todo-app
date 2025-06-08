@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http/httptest"
 	"testing"
-	"todo-app/pkg/service"
-	service_mocks "todo-app/pkg/service/mocks"
+	"todo-app1/pkg/service"
+	service_mocks "todo-app1/pkg/service/mocks"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang/mock/gomock"

@@ -11,9 +11,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"todo-app"
-	"todo-app/pkg/service"
-	service_mocks "todo-app/pkg/service/mocks"
+	"todo-app1"
+	"todo-app1/pkg/service"
+	service_mocks "todo-app1/pkg/service/mocks"
 )
 
 func TestHandler_signUp(t *testing.T) {

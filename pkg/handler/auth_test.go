@@ -2,6 +2,7 @@ package handler
 
 import (
 	"bytes"
+	"errors"
 	"net/http/httptest"
 	"testing"
 	"todo-app1"
@@ -44,6 +45,28 @@ func TestHandler_signUp(t *testing.T) {
 			expectedStatusCode:   200,
 			expectedResponseBody: `{"id":1}`,
 		},
+		{
+			name:                 "Wrong Input",
+			inputBody:            `{"username": "username"}`,
+			inputUser:            todo.User{},
+			mockBehavior:         func(r *service_mocks.MockAuthorization, user todo.User) {},
+			expectedStatusCode:   400,
+			expectedResponseBody: `{"message":"invalid input body"}`,
+		},
+		{
+			name:      "Service Error",
+			inputBody: `{"username": "username", "name": "Test Name", "password": "qwerty"}`,
+			inputUser: todo.User{
+				Username: "username",
+				Name:     "Test Name",
+				Password: "qwerty",
+			},
+			mockBehavior: func(r *service_mocks.MockAuthorization, user todo.User) {
+				r.EXPECT().CreateUser(user).Return(0, errors.New("something went wrong"))
+			},
+			expectedStatusCode:   500,
+			expectedResponseBody: `{"message":"something went wrong"}`,
+		},
 		// Другие сценарии:
 		// //https://youtu.be/Mvw5fbHGJFw?t=582  9:40
 	}
@@ -68,6 +91,8 @@ func TestHandler_signUp(t *testing.T) {
 			// Create Request
 			w := httptest.NewRecorder()
 			req := httptest.NewRequest("POST", "/sign-up",
+				//bytes.NewBufferString(test.inputBody) создает тело нашего запроса
+				//и реализует интерфейс io.Reader
 				bytes.NewBufferString(test.inputBody))
 
 			// Make Request
